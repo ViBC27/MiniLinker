@@ -15,6 +15,7 @@
     "types": ["node", "jest"],
     "noImplicitReturns": true,
     "noUnusedParameters": false,
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "strictPropertyInitialization": false,
