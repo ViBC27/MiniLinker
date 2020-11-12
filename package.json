@@ -16,7 +16,8 @@
     "dev": "yarn run server NODE_ENV=development",
     "prod": " yarn run server NODE_ENV=production",
     "watch:test": "jest --detectOpenHandles --forceExit --config jest.json",
-    "server": "node -r ts-node/register -r tsconfig-paths/register www.ts"
+    "server": "node -r ts-node/register -r tsconfig-paths/register www.ts",
+    "tsdev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "husky": {
     "hooks": {
@@ -36,6 +37,7 @@
     "sequelize": "^6.3.5",
     "sqlite3": "^5.0.0",
     "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.0.5"
   },
