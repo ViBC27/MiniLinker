@@ -1,0 +1,7 @@
+{
+  "testEnvironment": "node",
+  "transform": { "^.+\\.(ts|tsx)$": "ts-jest" },
+  "testMatch": ["**/tests/*.+(ts|tsx|js)"],
+  "globals": { "ts-jest": { "tsConfig": "tsconfig.json" } },
+  "coveragePathIgnorePatterns": ["node_modules/", ".vscode/", ".git/"]
+}
