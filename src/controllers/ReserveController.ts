@@ -26,9 +26,7 @@ export default {
   async show(req: Request, res: Response) {
     const reserveRepository = getRepository(Reserve);
 
-    const reserve = await reserveRepository.findOneOrFail({
-      select: ['selected', 'date', 'initial_value', 'amount']
-    });
+    const reserve = await reserveRepository.findOneOrFail();
 
     return res.json(ReserveView.render(reserve));
   }
