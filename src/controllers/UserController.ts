@@ -26,9 +26,7 @@ export default {
   async show(req: Request, res: Response) {
     const userRepository = getRepository(User);
 
-    const user = await userRepository.findOneOrFail({
-      select: ['name', 'email', 'image_name']
-    });
+    const user = await userRepository.findOneOrFail();
 
     return res.json(UserView.render(user));
   }

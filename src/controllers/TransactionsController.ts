@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, Like } from 'typeorm';
 
 import Transaction from '../models/Transaction';
 import TransactionView from '../views/transactions_views';
@@ -23,10 +23,30 @@ export default {
   },
 
   async index(req: Request, res: Response) {
+    const { day, month, year } = req.query;
+
+    const dayNumber = Number(day);
+    const monthNumber = Number(month);
+    const yearNumber = Number(year);
+
+    let monthString, dayString;
+
+    if (monthNumber) {
+      monthString = String(monthNumber).length === 2 ? `${monthNumber}` : `0${monthNumber}`;
+    }
+
+    if (dayNumber) {
+      dayString = String(dayNumber).length === 2 ? `${dayNumber}` : `0${dayNumber}`;
+    }
+
+    const searchString = `${yearNumber ? yearNumber : '%'}-${monthNumber ? monthString : '%'}-${
+      dayNumber ? dayString : '%'
+    }`;
+
     const transactionsRepository = getRepository(Transaction);
 
     const transactions = await transactionsRepository.find({
-      select: ['id', 'name', 'description', 'date', 'value']
+      date: Like(`${searchString}%`)
     });
 
     return res.json(TransactionView.renderMany(transactions));
