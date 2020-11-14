@@ -1,22 +1,32 @@
 import { Router } from 'express';
-import multer from 'multer';
+import MiniBankController from './controllers/MiniBankController';
 
-import TransactionsController from './controllers/TransactionsController';
-import UserController from './controllers/UserController';
-import ReserveController from './controllers/ReserveController';
+const bankRouter = Router();
+const mainRouter = Router();
+const registerRouter = Router();
+const emergencyRouter = Router();
+const miniBank = new MiniBankController();
 
-import multerConfig from './config/multer';
+bankRouter.use('/main');
+bankRouter.use('/register');
+bankRouter.use('/emergency');
 
-const routes = Router();
-const upload = multer(multerConfig);
+bankRouter.route('/amount').get(miniBank.getGeneralAmount);
 
-routes.post('/transactions', TransactionsController.create);
-routes.get('/transactions', TransactionsController.index);
+mainRouter
+  .route('/amount')
+  .get(miniBank.getMainAmount)
+  .post(miniBank.addMainAmount)
+  .put(miniBank.removeMainAmount);
 
-routes.post('/user', upload.single('image'), UserController.create);
-routes.get('/user', UserController.show);
-
-routes.post('/reserve', ReserveController.create);
-routes.get('/reserve', ReserveController.show);
+// registerRouter.route('/amount')
+//   .get(miniBank.getRegisterAmount)
+//   .post(miniBank.addRegisterAmount)
+//   .put(miniBank.removeRegisterAmount);
+//
+// emergencyRouter.route('/amount')
+//   .get(miniBank.getEmergencyAmount)
+//   .post(miniBank.addEmergencyAmount)
+//   .put(miniBank.removeEmergencyAmount);
 
 export default routes;
