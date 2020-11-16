@@ -1,44 +1,29 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class createReserve1605218306014 implements MigrationInterface {
+export class Main1605479980267 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'reserve',
+        name: 'Main',
         columns: [
           {
-            name: 'id',
+            name: 'idPerson',
             type: 'integer',
             unsigned: true,
             isPrimary: true,
             isGenerated: false
           },
           {
-            name: 'selected',
-            type: 'boolean'
-          },
-          {
-            name: 'date',
-            type: 'text'
-          },
-          {
-            name: 'initial_value',
-            type: 'decimal',
-            scale: 10,
-            precision: 2
-          },
-          {
             name: 'amount',
             type: 'decimal',
-            scale: 10,
-            precision: 2
+            precision: 2,
+            scale: 10
           }
         ]
       })
     );
   }
-
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('reserve');
+    await queryRunner.dropTable('Main');
   }
 }

@@ -1,19 +1,12 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('transactions')
-export default class Transaction {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
-  @Column()
-  name: string;
-
-  @Column()
-  description: string;
-
-  @Column()
-  date: string;
-
-  @Column()
-  value: number;
+@Entity('Transactions')
+class TransactionModel {
+  @PrimaryGeneratedColumn('increment') id: number;
+  @Column() description: string;
+  @Column() idPerson: number;
+  @Column() amount: number;
+  @Column() date: string;
 }
+
+export default TransactionModel;
